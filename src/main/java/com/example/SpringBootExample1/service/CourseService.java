@@ -9,9 +9,13 @@ import java.util.List;
 @Component
 public class CourseService {
     @Autowired
-    private CourseDAO courseDAO;
+    public CourseDAO courseDAO;
+
+    public CourseService(CourseDAO courseDAO){
+        this.courseDAO = courseDAO;
+    }
+
     public List<CourseSB> getAllCourse(){
-//        this.courseDAO.save(new CourseSB(1,"AA","aaaaaaaaaaaaaaaaaa"));
         return this.courseDAO.findAll();
     }
 }

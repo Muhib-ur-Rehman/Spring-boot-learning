@@ -11,20 +11,26 @@ import java.util.List;
 @Component
 public class StudntService {
     @Autowired
-    private StudentDao studentDao;
+    public StudentDao studentDao;
+
+    public StudntService(StudentDao studentDao){
+        this.studentDao = studentDao;
+    }
+
+
     public StudentSB addStudent(StudentSB studentSB){
-        return this.studentDao.save(studentSB);
+        return studentDao.save(studentSB);
     }
 
     public List<StudentSB> getAllStudent(){
-        return this.studentDao.findAll();
+        return studentDao.findAll();
     }
 
     public List<StudentSB> findStudentByRollNum(int rollNum){
-        return this.studentDao.findByRollNum(rollNum);
+        return studentDao.findByRollNum(rollNum);
     }
 
     @Transactional
-    public void deleteStudent(int rollNum){ this.studentDao.deleteByRollNum(rollNum);
+    public void deleteStudent(int rollNum){ studentDao.deleteByRollNum(rollNum);
     }
 }

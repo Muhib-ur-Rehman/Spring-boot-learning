@@ -5,6 +5,7 @@ import com.example.SpringBootExample1.model.StudentSB;
 import com.example.SpringBootExample1.service.CourseService;
 import com.example.SpringBootExample1.service.StudntService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Component
 public class TestController {
     @Autowired
-    private StudntService studntService;
+    public StudntService studntService;
     @Autowired
-    private CourseService courseService;
+    public CourseService courseService;
+
+    public TestController(StudntService studntService,CourseService courseService){
+        this.studntService=studntService;
+        this.courseService=courseService;
+    }
 
     @RequestMapping("/home")
-    public String testing(Model model){
+    public String redirectToHome(Model model){
         model.addAttribute("listOfCourse",this.courseService.getAllCourse());
         return "home";
     }

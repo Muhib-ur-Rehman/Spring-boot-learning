@@ -27,7 +27,7 @@ public class TestController {
         this.courseService=courseService;
     }
 
-    @RequestMapping("/home")
+    @RequestMapping("/index")
     public String redirectToHome(Model model){
         model.addAttribute("listOfCourse",this.courseService.getAllCourse());
         return "home";

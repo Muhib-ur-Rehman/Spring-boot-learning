@@ -43,7 +43,7 @@ public class StudentServiceIntegrationTest {
     @Order(3)
     void findStudentByRollNumTest(){
         Assert.assertNotNull(this.studntService.findStudentByRollNum(4));
-        Assert.assertNotEquals(0,this.studntService.findStudentByRollNum(4));
+        Assert.assertNotEquals(0,this.studntService.findStudentByRollNum(4).size());
     }
 
     @Test

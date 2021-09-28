@@ -16,7 +16,7 @@ public class StudentSB {
     private int age;
     private String gender;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<CourseSB> listOfCourses;
 
     @Override

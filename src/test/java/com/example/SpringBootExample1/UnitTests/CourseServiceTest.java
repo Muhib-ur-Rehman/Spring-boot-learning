@@ -21,8 +21,12 @@ public class CourseServiceTest {
     public void getAllCourseTest(){
         CourseService courseService = new CourseService(courseDAO);
         List<CourseSB> courseList = new ArrayList<>();
-        courseList.add(new CourseSB());
+        courseList.add(new CourseSB(1,"CS","Computer Science"));
+        courseList.add(new CourseSB(2,"AP","Applied Physics"));
         Mockito.when(this.courseDAO.findAll()).thenReturn(courseList);
         Assert.assertNotEquals(0,courseService.getAllCourse().size());
+        Assert.assertEquals(1,courseList.get(0).getCourseId());
+        Assert.assertEquals("CS",courseList.get(0).getCourseCode());
+        Assert.assertEquals("Computer Science",courseList.get(0).getCourseName());
     }
 }

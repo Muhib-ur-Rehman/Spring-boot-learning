@@ -25,9 +25,20 @@ public class StudentDaoUnitTest {
     @Test
     void findByRollNumTest(){
         List<StudentSB> studentList = new ArrayList<>();
-        studentList.add(new StudentSB());
+        StudentSB student = new StudentSB();
+        student.setRollNum(1);
+        student.setStudentId(10);
+        student.setAge(25);
+        student.setGender("Male");
+        student.setName("Ali");
+        studentList.add(student);
         Mockito.when(studentDao.findByRollNum(1)).thenReturn(studentList);
-        Assertions.assertNotNull(this.studentDao.findByRollNum(1));
+        List<StudentSB> searchedStudents = this.studentDao.findByRollNum(1);
+        Assertions.assertNotNull(searchedStudents);
+        Assertions.assertEquals(student.getStudentId(),searchedStudents.get(0).getStudentId());
+        Assertions.assertEquals(student.getRollNum(),searchedStudents.get(0).getRollNum());
+        Assertions.assertEquals(student.getName(),searchedStudents.get(0).getName());
+        Assertions.assertEquals(student.getGender(),searchedStudents.get(0).getGender());
     }
 
     @Test

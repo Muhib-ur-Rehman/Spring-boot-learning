@@ -22,6 +22,10 @@ public class StudentDaoIntegrationTest {
         List<StudentSB> listOfStudent = this.studentDao.findByRollNum(1);
         Assert.assertNotNull(listOfStudent);
         Assert.assertNotEquals(0,listOfStudent.size());
+        Assert.assertEquals(1,listOfStudent.get(0).getRollNum());
+        Assert.assertEquals("Waqas",listOfStudent.get(0).getName());
+        Assert.assertEquals(24,listOfStudent.get(0).getAge());
+        Assert.assertEquals(28,listOfStudent.get(0).getStudentId());
     }
 
     @Test

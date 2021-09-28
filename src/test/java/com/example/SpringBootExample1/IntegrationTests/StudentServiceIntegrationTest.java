@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class StudentServiceIntegrationTest {
 
@@ -29,21 +31,35 @@ public class StudentServiceIntegrationTest {
         student.setRollNum(4);
         student.setListOfCourses(null);
         student.setGender("Male");
-        Assert.assertEquals(student,this.studntService.addStudent(student));
+        StudentSB savedStudent = this.studntService.addStudent(student);
+        Assert.assertEquals(student.getName(),savedStudent.getName());
+        Assert.assertEquals(student.getRollNum(),savedStudent.getRollNum());
+        Assert.assertEquals(student.getAge(),savedStudent.getAge());
+        Assert.assertEquals(student.getGender(),savedStudent.getGender());
     }
 
     @Test
     @Order(2)
     void getAllStudentTest(){
-        Assert.assertNotNull(this.studntService.getAllStudent());
-        Assert.assertNotEquals(0,this.studntService.getAllStudent().size());
+        List<StudentSB> listOfSearchedStudents = this.studntService.getAllStudent();
+        Assert.assertNotNull(listOfSearchedStudents);
+        Assert.assertNotEquals(0,listOfSearchedStudents);
+        Assert.assertEquals(4,listOfSearchedStudents.get(listOfSearchedStudents.size()-1).getRollNum());
+        Assert.assertEquals("Ali",listOfSearchedStudents.get(listOfSearchedStudents.size()-1).getName());
+        Assert.assertEquals(24,listOfSearchedStudents.get(listOfSearchedStudents.size()-1).getAge());
+        Assert.assertEquals("Male",listOfSearchedStudents.get(listOfSearchedStudents.size()-1).getGender());
     }
 
     @Test
     @Order(3)
     void findStudentByRollNumTest(){
-        Assert.assertNotNull(this.studntService.findStudentByRollNum(4));
-        Assert.assertNotEquals(0,this.studntService.findStudentByRollNum(4).size());
+        List<StudentSB> listOfSearchedStudent = this.studntService.findStudentByRollNum(4);
+        Assert.assertNotNull(listOfSearchedStudent);
+        Assert.assertNotEquals(0,listOfSearchedStudent.size());
+        Assert.assertEquals(4,listOfSearchedStudent.get(0).getRollNum());
+        Assert.assertEquals(24,listOfSearchedStudent.get(0).getAge());
+        Assert.assertEquals("Ali",listOfSearchedStudent.get(0).getName());
+        Assert.assertEquals("Male",listOfSearchedStudent.get(0).getGender());
     }
 
     @Test
